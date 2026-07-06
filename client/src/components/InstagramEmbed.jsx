@@ -10,7 +10,7 @@ const InstagramIcon = ({ size = 20, className = "" }) => (
 );
 
 export default function InstagramEmbed({ 
-  videoSrc = "https://assets.mixkit.co/videos/preview/mixkit-fashion-woman-with-silver-glitter-makeup-40156-large.mp4",
+  videoSrc = "https://github.com/KazKozDev/auto-vertical-reframe/raw/main/assets/demo_vertical.mp4",
   instagramUrl = "https://www.instagram.com/reel/DY13BkgShZL/"
 }) {
   const videoRef = useRef(null);
@@ -59,6 +59,7 @@ export default function InstagramEmbed({
         loop
         muted
         playsInline
+        preload="auto"
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
       />
 
