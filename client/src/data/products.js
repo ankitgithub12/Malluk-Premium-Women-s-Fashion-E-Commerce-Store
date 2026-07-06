@@ -52,11 +52,16 @@ import mul8 from '../assets/Shop Section Image/Mul Cotton 8.webp';
 import mul9 from '../assets/Shop Section Image/Mul Cotton 9.webp';
 import mul10 from '../assets/Shop Section Image/Mul Cotton 10.webp';
 
-// Import Cotton Dobby suit images
 import dobby1 from '../assets/Shop Section Image/cotton dobby 1.webp';
 import dobby2 from '../assets/Shop Section Image/cotton dobby 2.webp';
 import dobby3 from '../assets/Shop Section Image/cotton dobby 3.webp';
 import dobby4 from '../assets/Shop Section Image/cotton dobby 4.webp';
+
+// Import Elara Ivory Jaam Cotton suit images
+import elara1 from '../assets/Shop Section Image/Elara Ivory Jaam Cotton Suit Set 1.png';
+import elara2 from '../assets/Shop Section Image/Elara Ivory Jaam Cotton Suit Set 2.png';
+import elara3 from '../assets/Shop Section Image/Elara Ivory Jaam Cotton Suit Set 3.png';
+import elara4 from '../assets/Shop Section Image/Elara Ivory Jaam Cotton Suit Set 4.png';
 
 export const products = [
   {
@@ -246,6 +251,32 @@ export const products = [
       "Sizes: M to XXL available",
       "Worldwide Shipping available"
     ]
+  },
+  {
+    id: "suit_08",
+    name: "Elara Ivory Jaam Cotton Suit Set",
+    price: 1875,
+    originalPrice: 2450,
+    discount: 23,
+    rating: 4.9,
+    images: [elara1, elara2, elara3, elara4],
+    category: "Cotton Suit Sets",
+    description: "Simplicity meets elegance with our Elara Ivory Jaam Cotton Suit Set. Crafted in premium Jaam Cotton with graceful embroidery and artistic floral prints, it’s the perfect outfit for everyday sophistication, office wear, festive gatherings, and special occasions.",
+    sizes: ["S", "M", "L", "XL", "XXL"],
+    colors: [
+      { name: "Ivory White", hex: "#FAF6EE" }
+    ],
+    isNewArrival: true,
+    isBestSeller: false,
+    isTrending: true,
+    codTerms: "Cash on Delivery Available (₹300 Advance Deposit Required)",
+    details: [
+      "Premium Jaam Cotton Fabric",
+      "Elegant Embroidery & Floral Print Design",
+      "Matching Dupatta Included",
+      "Soft, Breathable & Comfortable",
+      "Free Delivery Pan India"
+    ]
   }
 ];
 
@@ -272,7 +303,7 @@ export const categories = [
     id: "cat_cotton",
     name: "Cotton Suit Sets",
     image: pink1,
-    itemCount: 2
+    itemCount: 3
   }
 ];
 
