@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import InstagramEmbed from '../components/InstagramEmbed';
+import aboutImage1 from '../assets/About Section Image/image 1.webp';
+import aboutImage2 from '../assets/About Section Image/image 2.webp';
 
 export default function AboutUs() {
   useEffect(() => {
@@ -40,7 +42,7 @@ export default function AboutUs() {
           </div>
           <div className="lg:col-span-6 aspect-[4/3] overflow-hidden shadow-md border border-primary/5">
             <img
-              src="https://images.unsplash.com/photo-1548624149-f7b3156c2199?w=800&auto=format&fit=crop&q=80"
+              src={aboutImage1}
               alt="Atelier sketches and pattern making"
               className="w-full h-full object-cover transform hover:scale-103 transition-transform duration-1000"
             />
@@ -66,7 +68,7 @@ export default function AboutUs() {
           </div>
           <div className="lg:col-span-6 lg:order-1 aspect-[4/3] overflow-hidden shadow-md border border-primary/5">
             <img
-              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80"
+              src={aboutImage2}
               alt="Italian linen tailoring"
               className="w-full h-full object-cover transform hover:scale-103 transition-transform duration-1000"
             />
