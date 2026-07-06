@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import heroImage from '../assets/hero.png';
+import heroBg from '../assets/New Arrivals Image/Meher Mocha Embroidered Suit Set 1.webp';
 
 export default function Hero() {
   return (
@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Background Image with Dark Vignette Overlay */}
       <div className="absolute inset-0">
         <img
-          src={heroImage}
+          src={heroBg}
           alt="Malluk Luxury Editorial"
           className="h-full w-full object-cover object-[center_35%] transform scale-102 filter brightness-[0.6] contrast-[1.05]"
         />
