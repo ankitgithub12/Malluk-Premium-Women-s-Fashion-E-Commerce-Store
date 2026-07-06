@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import aboutStoryImage from '../assets/About Section Image/image 2.webp';
 
 export default function PromotionalBanner() {
   return (
@@ -62,7 +63,7 @@ export default function PromotionalBanner() {
           <div className="lg:col-span-6 w-full h-full relative flex items-center justify-center py-4">
             <div className="w-full aspect-[4/5] max-w-[450px] relative overflow-hidden shadow-xl border border-primary/10">
               <img
-                src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop&q=80"
+                src={aboutStoryImage}
                 alt="Editorial Craftsmanship"
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-1000"
               />
