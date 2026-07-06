@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import heroImage from '../assets/hero.png';
 
 export default function Hero() {
   return (
@@ -9,7 +10,7 @@ export default function Hero() {
       {/* Background Image with Dark Vignette Overlay */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=80"
+          src={heroImage}
           alt="Malluk Luxury Editorial"
           className="h-full w-full object-cover object-[center_35%] transform scale-102 filter brightness-[0.6] contrast-[1.05]"
         />
