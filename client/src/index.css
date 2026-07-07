@@ -25,6 +25,10 @@
   input, select, textarea {
     @apply focus:outline-none focus:border-primary/80 transition-colors duration-300;
   }
+
+  button, select, [role="button"], a {
+    cursor: pointer;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
