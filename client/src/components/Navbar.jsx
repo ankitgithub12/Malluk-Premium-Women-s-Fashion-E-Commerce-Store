@@ -298,10 +298,10 @@ export default function Navbar() {
                     <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">Suggested Categories</h3>
                     <ul className="space-y-3">
                       {[
-                        { label: 'Silk Evening Dresses', cat: 'Dresses' },
-                        { label: 'Virgin Wool Coats & Blazers', cat: 'Outerwear' },
-                        { label: 'Mongolian Cashmere Knits', cat: 'Matching%20Sets' },
-                        { label: 'Leather Accessories & Bags', cat: 'Accessories' },
+                        { label: 'Embroidered Suit Sets', cat: 'Embroidered Suit Sets' },
+                        { label: 'Chikankari Suit Sets', cat: 'Chikankari Suit Sets' },
+                        { label: 'Floral Suit Sets', cat: 'Floral Suit Sets' },
+                        { label: 'Cotton Suit Sets', cat: 'Cotton Suit Sets' },
                       ].map((item, idx) => (
                         <motion.li
                           key={item.cat}
@@ -325,7 +325,7 @@ export default function Navbar() {
                   >
                     <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">Trending Searches</h3>
                     <div className="flex flex-wrap gap-2">
-                      {['Aurelia Silk', 'Helena Blazer', 'Cashmere Set', 'Gold Chain Bag', 'Linen Vest'].map((term, idx) => (
+                      {['Meher Mocha', 'Noor Sky Blue', 'Zaria Ivory', 'Chikankari', 'Sage Green', 'Shisha Work'].map((term, idx) => (
                         <motion.button
                           key={term}
                           initial={{ opacity: 0, scale: 0.9 }}
