@@ -134,7 +134,7 @@ export const products = [
       { name: "Cream White", hex: "#FFFDF9" }
     ],
     isNewArrival: true,
-    isBestSeller: false,
+    isBestSeller: true,
     isTrending: true,
     codTerms: "Cash on Delivery Available (₹300 Advance Deposit Required)",
     details: [

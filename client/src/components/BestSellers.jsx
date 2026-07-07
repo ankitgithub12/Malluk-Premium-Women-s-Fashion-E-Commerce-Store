@@ -32,22 +32,22 @@ export default function BestSellers() {
         
         {/* Section Header */}
         <motion.div
-          className="text-center max-w-xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="text-[10px] uppercase tracking-[0.2em] text-accent font-semibold block mb-3">
-            Atelier Icons
+          <span className="text-xs uppercase tracking-[0.3em] text-accent font-bold block mb-4">
+            ✦ Atelier Icons ✦
           </span>
-          <h2 className="text-3xl md:text-4xl font-light tracking-wide text-primary uppercase">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-primary uppercase">
             Best <span className="font-serif italic font-normal text-accent normal-case">Sellers</span>
           </h2>
-          <div className="section-ornament mt-4">
+          <div className="section-ornament mt-5">
             <span className="diamond" />
           </div>
-          <p className="text-xs text-brand-text/50 tracking-wider mt-4 leading-relaxed font-body">
+          <p className="text-xs sm:text-sm text-brand-text/50 tracking-wider mt-5 leading-relaxed font-body max-w-md mx-auto">
             Time-tested silhouettes loved by the global Malluk clientele, tailored for effortless luxury.
           </p>
         </motion.div>
