@@ -34,7 +34,7 @@ export default function InstagramGallery() {
           {instagramPosts.map((post) => (
             <a
               key={post.id}
-              href="https://instagram.com"
+              href={post.link || "https://www.instagram.com/mallukbykanikaa"}
               target="_blank"
               rel="noopener noreferrer"
               className="relative overflow-hidden aspect-square group shadow-sm"

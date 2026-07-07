@@ -392,31 +392,37 @@ export const instagramPosts = [
   {
     id: "ig_1",
     image: meher3,
-    likes: 2450
+    likes: 2450,
+    link: "https://www.instagram.com/p/DadQPEFEkvW/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     id: "ig_2",
     image: blue3,
-    likes: 1850
+    likes: 1850,
+    link: "https://www.instagram.com/p/DadOND1kq7f/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     id: "ig_3",
     image: ivory3,
-    likes: 1941
+    likes: 1941,
+    link: "https://www.instagram.com/p/DadOtm-DVru/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     id: "ig_4",
     image: pink3,
-    likes: 2200
+    likes: 2200,
+    link: "https://www.instagram.com/p/DadNzpYkg-Y/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     id: "ig_5",
     image: meher2,
-    likes: 3105
+    likes: 3105,
+    link: "https://www.instagram.com/p/DadQPEFEkvW/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     id: "ig_6",
     image: blue2,
-    likes: 2712
+    likes: 2712,
+    link: "https://www.instagram.com/p/DadOND1kq7f/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   }
 ];

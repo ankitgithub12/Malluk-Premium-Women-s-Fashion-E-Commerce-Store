@@ -220,7 +220,11 @@ export default function Navbar() {
               <div>
                 <div className="flex justify-between items-center border-b border-white/20 pb-4">
                   <div className="flex items-center gap-4 flex-1">
-                    <Search className="text-accent" size={24} />
+                    <img 
+                      src={logoImage} 
+                      alt="Malluk Logo" 
+                      className="h-10 w-10 object-cover border border-accent/20 rounded-full shadow-md"
+                    />
                     <input
                       type="text"
                       placeholder="SEARCH THE ATELIER..."
