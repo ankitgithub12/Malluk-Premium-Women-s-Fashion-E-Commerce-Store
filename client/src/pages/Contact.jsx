@@ -99,7 +99,11 @@ export default function Contact() {
                     title: 'Atelier Flagship',
                     content: <p>Phase 8B, Sector 74, Mohali, Chandigarh, India</p>,
                     sub: null,
-                    link: { to: '/about', label: 'View Location details' }
+                    link: { 
+                      to: 'https://www.google.com/maps/place/Sahibzada+Ajit+Singh+Nagar,+Punjab/@30.7372083,76.7134124,16.84z/data=!4m6!3m5!1s0x390fee906da6f81f:0x512998f16ce508d8!8m2!3d30.7046486!4d76.7178726!16zL20vMDR0NzI1?hl=en&entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D', 
+                      label: 'View Location details',
+                      isExternal: true 
+                    }
                   }
                 ].map((item, idx) => (
                   <motion.div
@@ -117,9 +121,20 @@ export default function Contact() {
                       {item.content}
                       {item.sub && <p className="text-[10px] text-brand-text/40 mt-1 font-body">{item.sub}</p>}
                       {item.link && (
-                        <Link to={item.link.to} className="text-[10px] text-accent hover:text-primary transition-colors font-semibold uppercase mt-1 inline-block">
-                          {item.link.label}
-                        </Link>
+                        item.link.isExternal ? (
+                          <a 
+                            href={item.link.to} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-[10px] text-accent hover:text-primary transition-colors font-semibold uppercase mt-1 inline-block"
+                          >
+                            {item.link.label}
+                          </a>
+                        ) : (
+                          <Link to={item.link.to} className="text-[10px] text-accent hover:text-primary transition-colors font-semibold uppercase mt-1 inline-block">
+                            {item.link.label}
+                          </Link>
+                        )
                       )}
                     </div>
                   </motion.div>
