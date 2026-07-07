@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Menu, X, Search, Heart, ShoppingBag, User, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,11 +15,7 @@ export default function Navbar() {
   // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -40,31 +36,43 @@ export default function Navbar() {
     { name: 'FAQ', path: '/faq' }
   ];
 
-  // Determine if navbar should be transparent (e.g. on Homepage before scrolling)
+  // Determine if navbar should be transparent
   const isHomepage = location.pathname === '/';
-  const navbarBg = isScrolled 
-    ? 'bg-primary border-b border-primary/20 shadow-lg text-white' 
-    : isHomepage 
-      ? 'bg-transparent text-white' 
-      : 'bg-primary border-b border-primary/20 text-white';
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-40 transition-all duration-500 ease-in-out ${navbarBg}`}>
-        {/* Announcement Bar */}
-        <div className="bg-accent text-primary text-[11px] font-medium tracking-widest text-center py-2 px-4 uppercase select-none">
-          Complimentary Worldwide Concierge Delivery for Orders Over ₹25,000 • Easy Returns
+      <header
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-700 ease-out text-white ${
+          isScrolled
+            ? 'glass shadow-2xl shadow-primary/10'
+            : isHomepage
+              ? 'bg-transparent'
+              : 'glass'
+        }`}
+      >
+        {/* Announcement Bar - Scrolling Marquee */}
+        <div className="bg-accent text-primary text-[11px] font-medium tracking-widest text-center py-2 px-4 uppercase select-none overflow-hidden">
+          <div className="animate-marquee whitespace-nowrap inline-block">
+            <span className="mx-8">✦ Complimentary Worldwide Concierge Delivery for Orders Over ₹25,000</span>
+            <span className="mx-8">✦ Easy Returns Within 14 Days</span>
+            <span className="mx-8">✦ Use Code MALLUKGOLD for 10% Off</span>
+            <span className="mx-8">✦ Complimentary Worldwide Concierge Delivery for Orders Over ₹25,000</span>
+            <span className="mx-8">✦ Easy Returns Within 14 Days</span>
+            <span className="mx-8">✦ Use Code MALLUKGOLD for 10% Off</span>
+          </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo on Left */}
             <div className="flex-shrink-0 flex items-center">
-              <Link to="/" className="flex items-center gap-2 group">
-                <img 
-                  src={logoImage} 
-                  alt="Malluk Logo" 
-                  className="h-12 w-12 object-cover border border-accent/20 rounded shadow-md group-hover:border-accent transition-all duration-500" 
+              <Link to="/" className="flex items-center gap-3 group">
+                <motion.img
+                  src={logoImage}
+                  alt="Malluk Logo"
+                  className="h-12 w-12 object-cover border border-accent/20 rounded shadow-md group-hover:border-accent transition-all duration-500"
+                  whileHover={{ scale: 1.08, rotate: 2 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
                 />
                 <span className="font-heading text-2xl tracking-widest uppercase text-white font-medium">
                   Malluk
@@ -74,60 +82,79 @@ export default function Navbar() {
 
             {/* Navigation Centered (Desktop) */}
             <nav className="hidden lg:flex space-x-8">
-              {navLinks.map((link) => (
-                <NavLink
+              {navLinks.map((link, index) => (
+                <motion.div
                   key={link.name}
-                  to={link.path}
-                  className={({ isActive }) => `
-                    font-body text-xs uppercase tracking-widest hover:text-accent transition-colors duration-300 relative py-2
-                    ${isActive ? 'text-accent font-semibold after:scale-x-100' : 'text-white/80'}
-                    after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-accent after:transition-transform after:duration-300 hover:after:scale-x-100
-                  `}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 + index * 0.06 }}
                 >
-                  {link.name}
-                </NavLink>
+                  <NavLink
+                    to={link.path}
+                    className={({ isActive }) => `
+                      font-body text-xs uppercase tracking-widest hover:text-accent transition-colors duration-300 relative py-2
+                      ${isActive ? 'text-accent font-semibold after:scale-x-100' : 'text-white/80'}
+                      after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-gradient-to-r after:from-transparent after:via-accent after:to-transparent after:transition-transform after:duration-400 hover:after:scale-x-100
+                    `}
+                  >
+                    {link.name}
+                  </NavLink>
+                </motion.div>
               ))}
             </nav>
 
             {/* Icons on Right */}
             <div className="hidden sm:flex items-center space-x-5">
-              <button 
+              <motion.button
                 onClick={() => setIsSearchOpen(true)}
                 className="p-2 hover:text-accent transition-colors duration-300"
                 aria-label="Search Catalog"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <Search size={20} strokeWidth={1.5} />
-              </button>
+              </motion.button>
 
-              <Link 
-                to="/wishlist" 
-                className="p-2 hover:text-accent transition-colors duration-300 relative"
-                aria-label="View Wishlist"
-              >
-                <Heart size={20} strokeWidth={1.5} />
-                {wishlistItems.length > 0 && (
-                  <span className="absolute top-0 right-0 bg-accent text-primary text-[9px] font-bold rounded-full h-4 w-4 flex items-center justify-center border border-primary animate-bounce">
-                    {wishlistItems.length}
-                  </span>
-                )}
-              </Link>
+              <motion.div whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.95 }}>
+                <Link 
+                  to="/wishlist" 
+                  className="p-2 hover:text-accent transition-colors duration-300 relative block"
+                  aria-label="View Wishlist"
+                >
+                  <Heart size={20} strokeWidth={1.5} />
+                  {wishlistItems.length > 0 && (
+                    <span className="absolute top-0 right-0 bg-accent text-primary text-[9px] font-bold rounded-full h-4 w-4 flex items-center justify-center border border-primary animate-pulse-ring">
+                      {wishlistItems.length}
+                    </span>
+                  )}
+                </Link>
+              </motion.div>
 
-              <button 
+              <motion.button
                 onClick={() => setIsCartOpen(true)}
                 className="p-2 hover:text-accent transition-colors duration-300 relative"
                 aria-label="Open Shopping Cart"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <ShoppingBag size={20} strokeWidth={1.5} />
                 {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 bg-accent text-primary text-[9px] font-bold rounded-full h-4 w-4 flex items-center justify-center border border-primary animate-pulse">
+                  <motion.span
+                    key={cartCount}
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-0 right-0 bg-accent text-primary text-[9px] font-bold rounded-full h-4 w-4 flex items-center justify-center border border-primary animate-pulse-ring"
+                  >
                     {cartCount}
-                  </span>
+                  </motion.span>
                 )}
-              </button>
+              </motion.button>
 
-              <Link to="/about" className="p-2 hover:text-accent transition-colors duration-300" aria-label="Customer Profile">
-                <User size={20} strokeWidth={1.5} />
-              </Link>
+              <motion.div whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.95 }}>
+                <Link to="/about" className="p-2 hover:text-accent transition-colors duration-300 block" aria-label="Customer Profile">
+                  <User size={20} strokeWidth={1.5} />
+                </Link>
+              </motion.div>
             </div>
 
             {/* Mobile Hamburger Trigger */}
@@ -156,7 +183,12 @@ export default function Navbar() {
                 className="p-2 hover:text-accent transition-colors duration-300"
                 aria-label="Toggle Menu"
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 90 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </motion.div>
               </button>
             </div>
           </div>
@@ -169,25 +201,32 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="bg-primary/95 backdrop-blur-md border-b border-primary/20 sm:hidden block overflow-hidden"
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="glass-dark sm:hidden block overflow-hidden"
             >
               <div className="px-4 pt-2 pb-6 space-y-3">
-                {navLinks.map((link) => (
-                  <NavLink
+                {navLinks.map((link, index) => (
+                  <motion.div
                     key={link.name}
-                    to={link.path}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={({ isActive }) => `
-                      block px-3 py-2 text-sm uppercase tracking-widest font-body
-                      ${isActive ? 'text-accent border-l-2 border-accent pl-4' : 'text-white/80'}
-                    `}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.06 }}
                   >
-                    {link.name}
-                  </NavLink>
+                    <NavLink
+                      to={link.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={({ isActive }) => `
+                        block px-3 py-2 text-sm uppercase tracking-widest font-body transition-all duration-300
+                        ${isActive ? 'text-accent border-l-2 border-accent pl-4' : 'text-white/80 hover:text-accent hover:pl-4'}
+                      `}
+                    >
+                      {link.name}
+                    </NavLink>
+                  </motion.div>
                 ))}
                 
                 <div className="pt-4 border-t border-white/10 flex justify-around">
-                  <Link to="/wishlist" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-accent relative flex items-center gap-2 py-2">
+                  <Link to="/wishlist" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-accent relative flex items-center gap-2 py-2 transition-colors">
                     <Heart size={18} />
                     <span className="text-xs uppercase tracking-widest">Wishlist</span>
                     {wishlistItems.length > 0 && (
@@ -196,7 +235,7 @@ export default function Navbar() {
                       </span>
                     )}
                   </Link>
-                  <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-accent flex items-center gap-2 py-2">
+                  <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="text-white hover:text-accent flex items-center gap-2 py-2 transition-colors">
                     <User size={18} />
                     <span className="text-xs uppercase tracking-widest">Profile</span>
                   </Link>
@@ -214,16 +253,24 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-primary/95 backdrop-blur-lg z-50 flex flex-col justify-start"
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 glass-dark z-50 flex flex-col justify-start"
           >
             <div className="max-w-4xl mx-auto w-full px-6 pt-24 pb-8 flex-1 flex flex-col justify-between">
               <div>
-                <div className="flex justify-between items-center border-b border-white/20 pb-4">
+                <motion.div
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.5 }}
+                  className="flex justify-between items-center border-b border-white/20 pb-4"
+                >
                   <div className="flex items-center gap-4 flex-1">
-                    <img 
+                    <motion.img 
                       src={logoImage} 
                       alt="Malluk Logo" 
                       className="h-10 w-10 object-cover border border-accent/20 rounded-full shadow-md"
+                      animate={{ rotate: [0, 360] }}
+                      transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                     />
                     <input
                       type="text"
@@ -240,69 +287,76 @@ export default function Navbar() {
                   >
                     <X size={28} />
                   </button>
-                </div>
+                </motion.div>
 
                 <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2, duration: 0.5 }}
+                  >
                     <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">Suggested Categories</h3>
                     <ul className="space-y-3">
-                      <li>
-                        <Link to="/shop?category=Dresses" onClick={() => setIsSearchOpen(false)} className="group text-sm hover:text-accent transition-colors flex items-center justify-between">
-                          <span>Silk Evening Dresses</span>
-                          <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/shop?category=Outerwear" onClick={() => setIsSearchOpen(false)} className="group text-sm hover:text-accent transition-colors flex items-center justify-between">
-                          <span>Virgin Wool Coats & Blazers</span>
-                          <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/shop?category=Matching%20Sets" onClick={() => setIsSearchOpen(false)} className="group text-sm hover:text-accent transition-colors flex items-center justify-between">
-                          <span>Mongolian Cashmere Knits</span>
-                          <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                      </li>
-                      <li>
-                        <Link to="/shop?category=Accessories" onClick={() => setIsSearchOpen(false)} className="group text-sm hover:text-accent transition-colors flex items-center justify-between">
-                          <span>Leather Accessories & Bags</span>
-                          <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </Link>
-                      </li>
+                      {[
+                        { label: 'Silk Evening Dresses', cat: 'Dresses' },
+                        { label: 'Virgin Wool Coats & Blazers', cat: 'Outerwear' },
+                        { label: 'Mongolian Cashmere Knits', cat: 'Matching%20Sets' },
+                        { label: 'Leather Accessories & Bags', cat: 'Accessories' },
+                      ].map((item, idx) => (
+                        <motion.li
+                          key={item.cat}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.3 + idx * 0.08 }}
+                        >
+                          <Link to={`/shop?category=${item.cat}`} onClick={() => setIsSearchOpen(false)} className="group text-sm hover:text-accent transition-colors flex items-center justify-between">
+                            <span>{item.label}</span>
+                            <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                          </Link>
+                        </motion.li>
+                      ))}
                     </ul>
-                  </div>
+                  </motion.div>
 
-                  <div>
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3, duration: 0.5 }}
+                  >
                     <h3 className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">Trending Searches</h3>
                     <div className="flex flex-wrap gap-2">
-                      {['Aurelia Silk', 'Helena Blazer', 'Cashmere Set', 'Gold Chain Bag', 'Linen Vest'].map((term) => (
-                        <button
+                      {['Aurelia Silk', 'Helena Blazer', 'Cashmere Set', 'Gold Chain Bag', 'Linen Vest'].map((term, idx) => (
+                        <motion.button
                           key={term}
-                          onClick={() => {
-                            setSearchQuery(term);
-                          }}
-                          className="px-4 py-2 border border-white/10 rounded-full text-xs hover:border-accent hover:text-accent transition-all duration-300 uppercase tracking-wider"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.4 + idx * 0.06 }}
+                          onClick={() => setSearchQuery(term)}
+                          className="px-4 py-2 border border-white/10 rounded-full text-xs hover:border-accent hover:text-accent hover:bg-accent/5 transition-all duration-300 uppercase tracking-wider"
                         >
                           {term}
-                        </button>
+                        </motion.button>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
 
               {searchQuery && (
-                <div className="mt-10 text-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-10 text-center"
+                >
                   <Link 
                     to={`/shop?search=${encodeURIComponent(searchQuery)}`}
                     onClick={() => setIsSearchOpen(false)}
-                    className="inline-flex items-center gap-3 bg-accent text-primary px-8 py-3 rounded-none uppercase text-xs font-semibold tracking-widest hover:bg-white hover:text-primary transition-all duration-300"
+                    className="inline-flex items-center gap-3 bg-accent text-primary px-8 py-3 rounded-none uppercase text-xs font-semibold tracking-widest hover:bg-white hover:text-primary transition-all duration-300 btn-shimmer"
                   >
                     <span>View Search Results for "{searchQuery}"</span>
                     <ArrowRight size={16} />
                   </Link>
-                </div>
+                </motion.div>
               )}
             </div>
           </motion.div>

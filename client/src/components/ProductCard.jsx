@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Star, Eye, ShoppingBag, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ShopContext } from '../context/ShopContext';
 
 export default function ProductCard({ product }) {
@@ -42,57 +42,79 @@ export default function ProductCard({ product }) {
   };
 
   const activeImage = product.images[activeImgIndex] || product.images[0];
+  const secondImage = product.images.length > 1 ? product.images[1] : null;
 
   return (
     <motion.div 
-      className="group relative flex flex-col bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 ease-out"
+      className="group relative flex flex-col bg-white overflow-hidden premium-card"
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      initial={{ opacity: 0, y: 15 }}
+      onMouseLeave={() => { setIsHovered(false); setActiveImgIndex(0); }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Product Image Area */}
-      <div className="relative overflow-hidden aspect-[3/4] bg-surface">
+      {/* Product Image Area with crossfade */}
+      <div className="relative overflow-hidden aspect-[3/4] bg-surface image-crossfade">
         <Link to={`/product/${product.id}`} className="block w-full h-full">
+          {/* Primary Image */}
           <img
             src={activeImage}
             alt={product.name}
-            className="w-full h-full object-cover object-center transform transition-transform duration-1000 ease-out group-hover:scale-105"
+            className="img-primary w-full h-full object-cover object-center transition-transform duration-[1.2s] ease-out"
             loading="lazy"
           />
+          {/* Secondary Image (crossfade on hover) */}
+          {secondImage && activeImgIndex === 0 && (
+            <img
+              src={secondImage}
+              alt={`${product.name} alternate`}
+              className="img-secondary w-full h-full object-cover object-center"
+              loading="lazy"
+            />
+          )}
         </Link>
+
+        {/* Shimmer overlay sweep on hover */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-[1.5s] ease-out pointer-events-none" />
 
         {/* Prev & Next Image Navigation */}
         {product.images.length > 1 && (
           <div className="absolute inset-x-2 top-1/2 -translate-y-1/2 flex justify-between z-10 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-            <button
+            <motion.button
               onClick={handlePrevImage}
               className="p-1.5 rounded-full bg-white/90 text-primary border border-white/20 hover:bg-primary hover:text-accent transition-all duration-300 shadow-md pointer-events-auto"
               aria-label="Previous Image"
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
             >
               <ChevronLeft size={16} />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
               onClick={handleNextImage}
               className="p-1.5 rounded-full bg-white/90 text-primary border border-white/20 hover:bg-primary hover:text-accent transition-all duration-300 shadow-md pointer-events-auto"
               aria-label="Next Image"
+              whileHover={{ scale: 1.15 }}
+              whileTap={{ scale: 0.9 }}
             >
               <ChevronRight size={16} />
-            </button>
+            </motion.button>
           </div>
         )}
 
         {/* Discount Badge */}
         {product.discount > 0 && (
-          <span className="absolute top-4 left-4 bg-primary text-white text-[9px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-none border border-accent/20">
+          <motion.span
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="absolute top-4 left-4 bg-primary text-white text-[9px] font-semibold uppercase tracking-widest px-2.5 py-1 rounded-none border border-accent/20 shimmer-effect"
+          >
             {product.discount}% OFF
-          </span>
+          </motion.span>
         )}
 
         {/* Wishlist Button (Top Right) */}
-        <button
+        <motion.button
           onClick={handleWishlistToggle}
           className={`absolute top-4 right-4 p-2.5 rounded-full backdrop-blur-md transition-all duration-350 shadow-sm border
             ${favorited 
@@ -100,27 +122,33 @@ export default function ProductCard({ product }) {
               : 'bg-white/80 text-primary border-white/10 hover:bg-primary hover:text-white'
             }`}
           aria-label={favorited ? "Remove from Wishlist" : "Add to Wishlist"}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.85 }}
         >
           <Heart size={16} fill={favorited ? "#C8A96A" : "none"} strokeWidth={1.5} />
-        </button>
+        </motion.button>
 
         {/* Quick Actions Panel (Slide Up from Bottom on Hover) */}
         <div className="absolute bottom-0 left-0 w-full p-4 flex flex-col gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out bg-gradient-to-t from-primary/80 via-primary/40 to-transparent">
-          <button
+          <motion.button
             onClick={handleQuickView}
-            className="w-full bg-white/95 text-primary text-xs uppercase font-medium tracking-widest py-3 px-4 hover:bg-accent hover:text-primary transition-all duration-300 flex items-center justify-center gap-2"
+            className="w-full bg-white/95 text-primary text-xs uppercase font-medium tracking-widest py-3 px-4 hover:bg-accent hover:text-primary transition-all duration-300 flex items-center justify-center gap-2 btn-shimmer"
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Eye size={14} />
             Quick View
-          </button>
+          </motion.button>
           
-          <button
+          <motion.button
             onClick={handleQuickAdd}
-            className="w-full bg-primary text-white text-xs uppercase font-medium tracking-widest py-3 px-4 hover:bg-accent hover:text-primary transition-all duration-300 flex items-center justify-center gap-2 border border-accent/10"
+            className="w-full bg-primary text-white text-xs uppercase font-medium tracking-widest py-3 px-4 hover:bg-accent hover:text-primary transition-all duration-300 flex items-center justify-center gap-2 border border-accent/10 btn-shimmer"
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.98 }}
           >
             <ShoppingBag size={14} />
             Quick Add
-          </button>
+          </motion.button>
         </div>
       </div>
 
