@@ -122,7 +122,7 @@ export default function Footer() {
             <div className="space-y-2 font-body text-[11px] tracking-wider text-white/50">
               <div className="flex items-center space-x-2">
                 <MapPin size={12} className="text-accent" />
-                <span>Atelier Flagship: 42 Madison Ave, New York</span>
+                <span>Atelier Flagship: Sector 74, Mohali, Chandigarh</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone size={12} className="text-accent" />

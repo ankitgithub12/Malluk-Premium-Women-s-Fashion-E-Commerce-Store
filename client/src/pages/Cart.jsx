@@ -80,7 +80,7 @@ export default function Cart() {
             <h2 className="font-heading text-3xl uppercase tracking-widest text-primary font-semibold mb-2">Order Confirmed</h2>
             <p className="text-xs text-accent uppercase tracking-widest font-semibold mb-4">Reservation ID: MLK-{Math.floor(100000 + Math.random() * 900000)}</p>
             <p className="text-xs text-brand-text/50 font-body leading-relaxed max-w-[340px] mx-auto">
-              Your luxury packaging is being prepared at our Madison Avenue atelier. A confirmation email with express tracking details has been sent.
+              Your luxury packaging is being prepared at our Chandigarh, Mohali atelier. A confirmation email with express tracking details has been sent.
             </p>
           </div>
           <Link

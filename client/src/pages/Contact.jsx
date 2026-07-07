@@ -82,7 +82,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary uppercase mb-1">Atelier Flagship</h4>
-                    <p>42 Madison Ave, Suite 10, New York, NY 10017</p>
+                    <p>Phase 8B, Sector 74, Mohali, Chandigarh, India</p>
                     <Link to="/about" className="text-[10px] text-accent hover:text-primary transition-colors font-semibold uppercase mt-1 inline-block">View Location details</Link>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ export default function Contact() {
             <div className="pt-6 border-t border-surface space-y-4">
               <h3 className="font-heading text-md uppercase tracking-wider text-primary font-semibold">Private Styling Session</h3>
               <p className="text-xs text-brand-text/60 leading-relaxed font-body">
-                We offer bespoke private showings at our flagships in New York, London, and Paris. Please indicate your desired date, location, and style preferences in your message.
+                We offer bespoke private showings at our flagship in Chandigarh, Mohali. Please indicate your desired date and style preferences in your message.
               </p>
             </div>
           </div>
