@@ -91,7 +91,7 @@ export default function Contact() {
                   {
                     icon: <Phone size={16} />,
                     title: 'Call Styling Desk',
-                    content: <a href="tel:+18009420199" className="hover:text-accent transition-colors">+1 (800) 942-0199</a>,
+                    content: <a href="tel:+918264446457" className="hover:text-accent transition-colors">+91 8264446457</a>,
                     sub: 'Mon - Fri: 9:00 AM - 6:00 PM EST'
                   },
                   {

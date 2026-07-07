@@ -181,7 +181,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <Phone size={12} className="text-accent" />
-                  <span>Concierge Call: +1 (800) 942-0199</span>
+                  <span>Concierge Call: +91 8264446457</span>
                 </div>
               </div>
             </motion.div>
